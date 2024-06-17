@@ -61,6 +61,7 @@
     <script src='app/domain/negociacao/Negociacao.js'></script>
     <script>
      var n1 = new Negociacao(new Date(), 30, 199);
+     Object.freeze(n1);
 
      console.log(n1.quantidade);
      console.log(n1.valor);
