@@ -58,7 +58,12 @@
         <tfoot>
         </tfoot>
     </table>
+    <script src='app/domain/negociacao/Negociacao.js'></script>
+    <script>
+     var n1 = new Negociacao(new Date(), 30, 199);
+     var volume = n1.obtemVolume();
 
-  <script src="app/index.js"></script>
+     console.log(volume);
+    </script>
 </body>
 </html>
