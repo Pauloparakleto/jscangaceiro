@@ -59,18 +59,6 @@
         </tfoot>
     </table>
     <script src='app/domain/negociacao/Negociacao.js'></script>
-    <script>
-     let hoje = new Date()
-     let n1 = new Negociacao(hoje, 30, 199);
-     Object.freeze(n1);
-
-     console.log(n1.quantidade);
-     console.log(n1.valor);
-     console.log(n1.data);
-     n1.data.setDate(24)
-     console.log(n1.data)
-     console.log(n1.volume);
-
-    </script>
+    <script src="app/index.js"></script>
 </body>
 </html>
