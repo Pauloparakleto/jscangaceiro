@@ -5,9 +5,12 @@ class NegociacaoController {
 
     alert('Chamei no controller')
 
-    let inputDate = document.querySelector('#date');
-    let inputQuantity = document.querySelector('#quantity');
-    let inputValue = document.querySelector('#value');
+    // I mention to JQuery, we will bind the $ variable to the document context
+    let $ = document.querySelector.bind(document);
+
+    let inputDate = $('#date');
+    let inputQuantity = $('#quantity');
+    let inputValue = $('#value');
     console.log(inputDate.value);
     console.log(parseInt(inputQuantity.value));
     console.log(parseFloat(inputValue.value));
