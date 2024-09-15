@@ -1,4 +1,11 @@
 class NegociacaoController {
+  constructor() {
+    let $ = document.querySelector.bind(document);
+    this._inputDate = $('#date');
+    this._inputQuantity = $('#quantity');
+    this._inputValue = $('#value');
+  }
+
   adiciona(event) {
     // cancela a submissao do formulario
     event.preventDefault();
@@ -6,13 +13,9 @@ class NegociacaoController {
     alert('Chamei no controller')
 
     // I mention to JQuery, we will bind the $ variable to the document context
-    let $ = document.querySelector.bind(document);
-
-    let inputDate = $('#date');
-    let inputQuantity = $('#quantity');
-    let inputValue = $('#value');
-    console.log(inputDate.value);
-    console.log(parseInt(inputQuantity.value));
-    console.log(parseFloat(inputValue.value));
+    console.log(this);
+    console.log(this._inputDate.value);
+    console.log(parseInt(this._inputQuantity.value));
+    console.log(parseFloat(this._inputValue.value));
   }
 }
