@@ -9,7 +9,7 @@ class NegociacaoController {
     let inputQuantity = document.querySelector('#quantity');
     let inputValue = document.querySelector('#value');
     console.log(inputDate.value);
-    console.log(inputQuantity.value);
-    console.log(inputValue.value);
+    console.log(parseInt(inputQuantity.value));
+    console.log(parseFloat(inputValue.value));
   }
 }
