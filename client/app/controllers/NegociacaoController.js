@@ -13,9 +13,17 @@ class NegociacaoController {
     alert('Chamei no controller')
 
     // I mention to JQuery, we will bind the $ variable to the document context
-    console.log(this);
-    console.log(this._inputDate.value);
-    console.log(parseInt(this._inputQuantity.value));
-    console.log(parseFloat(this._inputValue.value));
+    let date = new Date(...
+        this._inputDate.value
+        .split('-')
+        .map((item, index) => item - index % 2)
+    );
+
+    let tradeNegociation = new Negociacao(
+      date,
+      this._inputQuantity.valueAsNumber,
+      parseFloat(this._inputValue.value)
+    );
+    console.log(tradeNegociation);
   }
 }
