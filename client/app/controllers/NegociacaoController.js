@@ -13,7 +13,16 @@ class NegociacaoController {
     alert('Chamei no controller')
 
     // I mention to JQuery, we will bind the $ variable to the document context
-    let date = new Date(this._inputDate.value.split('-'));
+    let date = new Date(...
+        this._inputDate.value
+        .split('-')
+        .map(function(item, index) {
+         if (index == 1) {
+            return item - 1;
+          } 
+          return item;
+        })
+    );
 
     let tradeNegociation = new Negociacao(
       date,
