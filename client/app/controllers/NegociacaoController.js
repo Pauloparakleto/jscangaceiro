@@ -17,10 +17,7 @@ class NegociacaoController {
         this._inputDate.value
         .split('-')
         .map(function(item, index) {
-         if (index == 1) {
-            return item - 1;
-          } 
-          return item;
+          return item - index % 2;
         })
     );
 
