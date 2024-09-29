@@ -1,3 +1,4 @@
+
 class NegociacaoController {
   constructor() {
     let $ = document.querySelector.bind(document);
@@ -12,12 +13,10 @@ class NegociacaoController {
 
     alert('Chamei no controller')
 
+    let converter = DateConverter;
+
     // I mention to JQuery, we will bind the $ variable to the document context
-    let date = new Date(...
-        this._inputDate.value
-        .split('-')
-        .map((item, index) => item - index % 2)
-    );
+    let date = converter.toDate(this._inputDate.value);
 
     let tradeNegociation = new Negociacao(
       date,
@@ -25,7 +24,7 @@ class NegociacaoController {
       parseFloat(this._inputValue.value)
     );
 
-    let dayMonthYear = tradeNegociation.date.getDate() + '/' + (tradeNegociation.date.getMonth() + 1) + '/' + tradeNegociation.date.getYear();
+    let dayMonthYear = converter.toText(tradeNegociation.date)
     console.log(dayMonthYear);
     console.log(tradeNegociation);
   }
