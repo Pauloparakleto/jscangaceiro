@@ -24,6 +24,9 @@ class NegociacaoController {
       this._inputQuantity.valueAsNumber,
       parseFloat(this._inputValue.value)
     );
+
+    let dayMonthYear = tradeNegociation.date.getDate() + '/' + (tradeNegociation.date.getMonth() + 1) + '/' + tradeNegociation.date.getYear();
+    console.log(dayMonthYear);
     console.log(tradeNegociation);
   }
 }
