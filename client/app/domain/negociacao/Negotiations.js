@@ -8,6 +8,7 @@ class Negotiations {
   }
 
   toArray() {
-    return this._negotiations;
+    // Return a new array to prevent external access to the original one.
+    return [].concat(this._negotiations);
   }
 }
