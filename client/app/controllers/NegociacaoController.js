@@ -31,5 +31,14 @@ class NegociacaoController {
     console.log(dayMonthYear);
     console.log(tradeNegociation);
     console.log(this._negotiations.toArray());
+
+    this._cleanForm();
+  }
+
+  _cleanForm() {
+    this._inputQuantity.value = 1;
+    this._inputDate.value = '';
+    this._inputValue.value = 0.0;
+    this._inputDate.focus();
   }
 }
