@@ -20,16 +20,16 @@ class NegotiationsView {
           </thead>
 
           <tbody>
-            ${negotiations.toArray().map((negotiation) => {
-             return `
-                <tr>
-                  <td>${ DateConverter.toText(negotiation.date) }</td>
-                  <td>${ negotiation.quantidade }</td>
-                  <td>${ negotiation.valor }</td>
-                  <td>${ negotiation.volume }</td>
-                </tr>
-              `
-            }).join('')}
+            ${negotiations.toArray().map((negotiation) =>
+             `
+              <tr>
+                <td>${ DateConverter.toText(negotiation.date) }</td>
+                <td>${ negotiation.quantidade }</td>
+                <td>${ negotiation.valor }</td>
+                <td>${ negotiation.volume }</td>
+              </tr>
+             `
+            ).join('')}
           </tbody>
 
           <tfoot>
