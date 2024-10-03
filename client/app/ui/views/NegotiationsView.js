@@ -30,6 +30,12 @@ class NegotiationsView {
               </tr>
              `
             ).join('')}
+             <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>${ negotiations.totalSum() }</td>
+             </tr>
           </tbody>
 
           <tfoot>

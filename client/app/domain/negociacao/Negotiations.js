@@ -11,4 +11,9 @@ class Negotiations {
     // Return a new array to prevent external access to the original one.
     return [].concat(this._negotiations);
   }
+
+  totalSum() {
+    return this._negotiations.reduce((total, negotiation) =>
+      total + negotiation.volume, 0);
+  }
 }
