@@ -3,11 +3,11 @@ class NegotiationsView {
     this.selector = document.querySelector(selector);
   }
 
-  update(){
-    this.selector.innerHTML = this.template();
+  update(negotiations){
+    this.selector.innerHTML = this.template(negotiations);
   }
 
-  template(){
+  template(negotiations){
     return `
       <table class="table table-hover table-bordered">
           <thead>
@@ -20,6 +20,16 @@ class NegotiationsView {
           </thead>
 
           <tbody>
+            ${negotiations.toArray().map((negotiation) => {
+             return `
+                <tr>
+                  <td>${ DateConverter.toText(negotiation.date) }</td>
+                  <td>${ negotiation.quantidade }</td>
+                  <td>${ negotiation.valor }</td>
+                  <td>${ negotiation.volume }</td>
+                </tr>
+              `
+            }).join('')}
           </tbody>
 
           <tfoot>

@@ -22,7 +22,7 @@ class NegociacaoController {
 
     console.log(this._negotiations.toArray());
 
-    this._negotiationsView.update();
+    this._negotiationsView.update(this._negotiations);
 
     this._cleanForm();
   }
