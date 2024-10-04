@@ -1,7 +1,8 @@
 
 class NegociacaoController {
   constructor() {
-    let $ = document.querySelector.bind(document);
+    const $ = document.querySelector.bind(document);
+
     this._inputDate = $('#date');
     this._inputQuantity = $('#quantity');
     this._inputValue = $('#value');
