@@ -5,8 +5,13 @@ class NegociacaoController {
     this._inputDate = $('#date');
     this._inputQuantity = $('#quantity');
     this._inputValue = $('#value');
+
     this._negotiations = new Negotiations();
     this._negotiationsView = new NegotiationsView('#negotiations');
+
+    this._message = new Message();
+    this._messageView = new MessageView('#messageView');
+    this._messageView.update(this._message);
   }
 
   adiciona(event) {
@@ -23,6 +28,8 @@ class NegociacaoController {
     console.log(this._negotiations.toArray());
 
     this._negotiationsView.update(this._negotiations);
+    this._message.text = 'You made a new negotiation!';
+    this._messageView.update(this._message);
 
     this._cleanForm();
   }
