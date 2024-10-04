@@ -6,4 +6,8 @@ class View {
   update(model){
     this.selector.innerHTML = this.template(model);
   }
+
+  template(){
+    throw new Error('Not implemented! You must implement it!');
+  }
 }
