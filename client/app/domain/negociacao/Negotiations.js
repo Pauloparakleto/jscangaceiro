@@ -16,7 +16,7 @@ class Negotiations {
     return [].concat(this._negotiations);
   }
 
-  totalSum() {
+  get totalSum() {
     return this._negotiations.reduce((total, negotiation) =>
       total + negotiation.volume, 0);
   }
