@@ -7,6 +7,10 @@ class Negotiations {
     this._negotiations.push(negotiation);
   }
 
+  clearList() {
+    return this._negotiations = [];
+  }
+
   toArray() {
     // Return a new array to prevent external access to the original one.
     return [].concat(this._negotiations);

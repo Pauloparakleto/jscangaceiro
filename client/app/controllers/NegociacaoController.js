@@ -43,6 +43,12 @@ class NegociacaoController {
     );
   }
 
+  clearIndex() {
+    event.preventDefault();
+    this._negotiations.clearList();
+    this._negotiationsView.update(this._negotiations);
+  }
+
   _cleanForm() {
     this._inputQuantity.value = 1;
     this._inputDate.value = '';
