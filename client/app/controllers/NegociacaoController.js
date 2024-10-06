@@ -44,7 +44,6 @@ class NegociacaoController {
   }
 
   clearIndex() {
-    event.preventDefault();
     this._negotiations.clearList();
     this._message.text = 'Negotiation list is empty!';
     this._messageView.update(this._message);
