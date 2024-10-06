@@ -22,15 +22,13 @@ class NegotiationsView extends View {
               </tr>
              `
             ).join('')}
-             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>${ negotiations.totalSum() }</td>
-             </tr>
           </tbody>
 
           <tfoot>
+            <tr>
+              <td colspan="3"></td>
+              <td>${negotiations.totalSum}</td>            
+            </tr>
           </tfoot>
       </table>
       `

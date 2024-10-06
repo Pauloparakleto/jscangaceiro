@@ -43,6 +43,13 @@ class NegociacaoController {
     );
   }
 
+  clearIndex() {
+    this._negotiations.clearList();
+    this._message.text = 'Negotiation list is empty!';
+    this._messageView.update(this._message);
+    this._negotiationsView.update(this._negotiations);
+  }
+
   _cleanForm() {
     this._inputQuantity.value = 1;
     this._inputDate.value = '';
