@@ -7,7 +7,15 @@ class NegociacaoController {
     this._inputQuantity = $('#quantity');
     this._inputValue = $('#value');
 
-    this._negotiations = new Negotiations();
+    // The arrow function has a static this. Its context is obtained
+    // from the code arround.
+    this._negotiations = new Negotiations(model => {
+      // The this here refers to the NegociacaoController.
+      // The reason is the arrow function.
+      // A function (){} declaration obtains the this dinamically.
+      this._negotiationsView.update(model);
+    });
+
     this._negotiationsView = new NegotiationsView('#negotiations');
 
     this._message = new Message();
@@ -30,7 +38,6 @@ class NegociacaoController {
 
     this._negotiationsView.update(this._negotiations);
     this._message.text = 'You made a new negotiation!';
-    this._messageView.update(this._message);
 
     this._cleanForm();
   }
@@ -47,7 +54,6 @@ class NegociacaoController {
     this._negotiations.clearList();
     this._message.text = 'Negotiation list is empty!';
     this._messageView.update(this._message);
-    this._negotiationsView.update(this._negotiations);
   }
 
   _cleanForm() {
