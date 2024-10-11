@@ -1,17 +1,14 @@
 class Negotiations {
-  constructor(hook) {
+  constructor() {
     this._negotiations = [];
-    this._hook = hook;
   }
 
   add(negotiation) {
     this._negotiations.push(negotiation);
-    this._hook(this);
   }
 
   clearList() {
     return this._negotiations = [];
-    this._hook(this);
   }
 
   toArray() {

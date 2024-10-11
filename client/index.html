@@ -53,5 +53,20 @@
     <script src='app/ui/views/MessageView.js'></script>
     <script src='app/controllers/NegociacaoController.js'></script>
     <script src="app/app.js"></script>
+    <script>
+      const negotiation = new Proxy(new Negociacao(new Date(), 2, 300),
+        {
+          get: function(target, prop, receiver) {
+            console.log(`the ${prop} is accessed`);
+            return target[prop];
+          },
+
+          set: function(target, prop, value, receiver) {
+            console.log(`${prop} holds ${target[prop]} and will receive ${value}`);
+            target[prop] = value;
+            return target[prop] == value;
+          }
+        });
+    </script>
 </body>
 </html>
