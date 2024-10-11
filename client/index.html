@@ -64,9 +64,12 @@
           set: function(target, prop, value, receiver) {
             console.log(`${prop} holds ${target[prop]} and will receive ${value}`);
             target[prop] = value;
-            return target[prop] == value;
+            return Reflect.set(target, prop, value);
           }
         });
+
+      negotiation._quantidade = 10;
+      negotiation._valor = 200;
     </script>
 </body>
 </html>
