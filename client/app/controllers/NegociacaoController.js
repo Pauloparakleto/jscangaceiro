@@ -2,16 +2,28 @@
 class NegociacaoController {
   constructor() {
     const $ = document.querySelector.bind(document);
+    const self = this;
 
     this._inputDate = $('#date');
     this._inputQuantity = $('#quantity');
     this._inputValue = $('#value');
-
     this._negotiationsView = new NegotiationsView('#negotiations');
+    this._negotiations = new Proxy(new Negotiations(), {
+      get(target, prop, receiver) {
+        if (typeof(target[prop]) == typeof(Function) && ['add', 'clearList']
+          .includes(prop)) {
+          return function () {
+            console.log(`"${prop}" disparou a armadilha`);
+            target[prop].apply(target, arguments);
+            self._negotiationsView.update(target);
+          }
+        }
+      }
+    })
+
 
     this._message = new Message();
     this._messageView = new MessageView('#messageView');
-    this._messageView.update(this._message);
   }
 
   adiciona(event) {
@@ -25,9 +37,6 @@ class NegociacaoController {
 
     this._negotiations.add(this._createNegotiation());
 
-    console.log(this._negotiations.toArray());
-
-    this._negotiationsView.update(this._negotiations);
     this._message.text = 'You made a new negotiation!';
 
     this._cleanForm();
