@@ -10,6 +10,13 @@ class ProxyFactory {
             hook(target);
           }
         }
+      },
+
+      set(target, prop, value, receiver) {
+        const updated = Reflect.set(target, prop, value);
+        if (props.includes(prop)) hook(target);
+
+        return updated;
       }
     })
   }
