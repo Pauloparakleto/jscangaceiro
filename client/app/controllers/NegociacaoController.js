@@ -14,7 +14,11 @@ class NegociacaoController {
       model => this._negotiationsView.update(model)
     );
 
-    this._message = new Message();
+    this._message = ProxyFactory.create(
+        new Message(),
+      ['text'],
+      model => this._messageView.update(model)
+    )
     this._messageView = new MessageView('#messageView');
   }
 
@@ -45,7 +49,6 @@ class NegociacaoController {
   clearIndex() {
     this._negotiations.clearList();
     this._message.text = 'Negotiation list is empty!';
-    this._messageView.update(this._message);
   }
 
   _cleanForm() {
