@@ -8,19 +8,11 @@ class NegociacaoController {
     this._inputQuantity = $('#quantity');
     this._inputValue = $('#value');
     this._negotiationsView = new NegotiationsView('#negotiations');
-    this._negotiations = new Proxy(new Negotiations(), {
-      get(target, prop, receiver) {
-        if (typeof(target[prop]) == typeof(Function) && ['add', 'clearList']
-          .includes(prop)) {
-          return function () {
-            console.log(`"${prop}" disparou a armadilha`);
-            target[prop].apply(target, arguments);
-            self._negotiationsView.update(target);
-          }
-        }
-      }
-    })
-
+    this._negotiations = ProxyFactory.create(
+      new Negotiations(),
+      ['add', 'clearList'],
+      model => this._negotiationsView.update(model)
+    );
 
     this._message = new Message();
     this._messageView = new MessageView('#messageView');
