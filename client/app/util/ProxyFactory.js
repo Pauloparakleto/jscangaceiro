@@ -2,7 +2,7 @@ class ProxyFactory {
   static create(object, props, hook){
     return new Proxy(object, {
       get(target, prop, receiver) {
-        if (typeof(target[prop]) == typeof(Function) && ['add', 'clearList']
+        if (ProxyFactory._isFunction(target[prop]) && ['add', 'clearList']
           .includes(prop)) {
           return function () {
             console.log(`"${prop}" disparou a armadilha na ProxyFactory`);
@@ -19,5 +19,9 @@ class ProxyFactory {
         return updated;
       }
     })
+  }
+
+  static _isFunction(functionName){
+    return typeof(functionName) == typeof(Function);
   }
 }
