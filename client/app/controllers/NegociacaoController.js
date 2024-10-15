@@ -1,25 +1,24 @@
 
 class NegociacaoController {
   constructor() {
+    // I mention to JQuery, we will bind the $ variable to the document context
     const $ = document.querySelector.bind(document);
     const self = this;
 
     this._inputDate = $('#date');
     this._inputQuantity = $('#quantity');
     this._inputValue = $('#value');
-    this._negotiationsView = new NegotiationsView('#negotiations');
-    this._negotiations = ProxyFactory.create(
+    this._negotiations = new Bind(
       new Negotiations(),
-      ['add', 'clearList'],
-      model => this._negotiationsView.update(model)
+      new NegotiationsView('#negotiations'),
+      ['add', 'clearList']
     );
 
-    this._message = ProxyFactory.create(
-        new Message(),
-      ['text'],
-      model => this._messageView.update(model)
-    )
-    this._messageView = new MessageView('#messageView');
+    this._message = new Bind(
+      new Message(),
+      new MessageView('#messageView'),
+      ['text']
+    );
   }
 
   adiciona(event) {
@@ -28,7 +27,6 @@ class NegociacaoController {
 
     let converter = DateConverter;
 
-    // I mention to JQuery, we will bind the $ variable to the document context
     let date = converter.toDate(this._inputDate.value);
 
     this._negotiations.add(this._createNegotiation());
