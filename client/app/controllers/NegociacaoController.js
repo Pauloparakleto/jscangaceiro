@@ -22,18 +22,29 @@ class NegociacaoController {
   }
 
   adiciona(event) {
-    // cancela a submissao do formulario
-    event.preventDefault();
+    try {
+      
+      // cancela a submissao do formulario
+      event.preventDefault();
 
-    let converter = DateConverter;
+      let converter = DateConverter;
 
-    let date = converter.toDate(this._inputDate.value);
+      let date = converter.toDate(this._inputDate.value);
 
-    this._negotiations.add(this._createNegotiation());
+      this._negotiations.add(this._createNegotiation());
 
-    this._message.text = 'You made a new negotiation!';
+      this._message.text = 'You made a new negotiation!';
 
-    this._cleanForm();
+      this._cleanForm();
+    } catch (error) {
+      console.log(error);
+      console.log(error.stack);
+      if (error instanceof InvalidDate){
+        this._message.text = error.message;
+      } else {
+        this._message.text = 'Something went wrong!';
+      }
+    }
   }
 
   _createNegotiation(){

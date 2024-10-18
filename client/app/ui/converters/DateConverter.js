@@ -9,7 +9,7 @@ class DateConverter {
 
   static  toDate(string) {
     if (!/^\d{2}\/\d{2}\/\d{4}$/.test(string))
-      throw new Error('Wrong format. Must be aaaa/mm/dd');
+      throw new InvalidDate();
 
     return new Date(...string.split('/')
           .reverse()
