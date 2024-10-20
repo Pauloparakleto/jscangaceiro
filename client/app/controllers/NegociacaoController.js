@@ -54,7 +54,21 @@ class NegociacaoController {
   }
 
   importIndex() {
-    alert('It will import negociations');
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'negociacoes/semana');
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          console.log('receiving negotiations from server');
+          console.log(JSON.parse(xhr.responseText));
+        } else {
+            console.log(xhr.responseText);
+            this._message.text = 'It was not possible to get the weekly negotiations';
+        }
+      }
+    }
+
+    xhr.send();
   }
 
   _createNegotiation(){
