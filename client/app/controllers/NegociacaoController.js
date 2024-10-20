@@ -47,17 +47,36 @@ class NegociacaoController {
     }
   }
 
+
+  clearIndex() {
+    this._negotiations.clearList();
+    this._message.text = 'Negotiation list is empty!';
+  }
+
+  importIndex() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'negociacoes/semana');
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          console.log('receiving negotiations from server');
+          console.log(JSON.parse(xhr.responseText));
+        } else {
+            console.log(xhr.responseText);
+            this._message.text = 'It was not possible to get the weekly negotiations';
+        }
+      }
+    }
+
+    xhr.send();
+  }
+
   _createNegotiation(){
     return new Negociacao(
       DateConverter.toDate(this._inputDate.value),
       this._inputQuantity.valueAsNumber,
       parseFloat(this._inputValue.value)
     );
-  }
-
-  clearIndex() {
-    this._negotiations.clearList();
-    this._message.text = 'Negotiation list is empty!';
   }
 
   _cleanForm() {
