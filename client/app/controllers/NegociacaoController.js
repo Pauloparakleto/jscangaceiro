@@ -47,17 +47,22 @@ class NegociacaoController {
     }
   }
 
+
+  clearIndex() {
+    this._negotiations.clearList();
+    this._message.text = 'Negotiation list is empty!';
+  }
+
+  importIndex() {
+    alert('It will import negociations');
+  }
+
   _createNegotiation(){
     return new Negociacao(
       DateConverter.toDate(this._inputDate.value),
       this._inputQuantity.valueAsNumber,
       parseFloat(this._inputValue.value)
     );
-  }
-
-  clearIndex() {
-    this._negotiations.clearList();
-    this._message.text = 'Negotiation list is empty!';
   }
 
   _cleanForm() {
