@@ -61,6 +61,8 @@ class NegociacaoController {
         if (xhr.status == 200) {
           console.log('receiving negotiations from server');
           console.log(JSON.parse(xhr.responseText));
+          JSON.parse(xhr.responseText).map( item => new Negociacao(new Date(item.data), item.quantidade, item.valor))
+          .forEach(negotiation => this._negotiations.add(negotiation));
         } else {
             console.log(xhr.responseText);
             this._message.text = 'It was not possible to get the weekly negotiations';
