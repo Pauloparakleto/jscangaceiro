@@ -8,6 +8,7 @@ class NegociacaoController {
     this._inputDate = $('#date');
     this._inputQuantity = $('#quantity');
     this._inputValue = $('#value');
+    this._service = new NegotiationService();
     this._negotiations = new Bind(
       new Negotiations(),
       new NegotiationsView('#negotiations'),
@@ -54,23 +55,16 @@ class NegociacaoController {
   }
 
   importIndex() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'negociacoes/semana');
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          console.log('receiving negotiations from server');
-          console.log(JSON.parse(xhr.responseText));
-          JSON.parse(xhr.responseText).map( item => new Negociacao(new Date(item.data), item.quantidade, item.valor))
-          .forEach(negotiation => this._negotiations.add(negotiation));
-        } else {
-            console.log(xhr.responseText);
-            this._message.text = 'It was not possible to get the weekly negotiations';
-        }
+    this._service.weekly((error, negotiations) => {
+      if (error) {
+        this._message.text = 'There is an error importing weekly negotiations';
+        return;
       }
-    }
 
-    xhr.send();
+      negotiations.forEach(negotiation => this._negotiations.add(negotiation));
+      this._message.text = 'Negotiations succesfully imported';
+
+    });
   }
 
   _createNegotiation(){
