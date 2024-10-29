@@ -55,16 +55,17 @@ class NegociacaoController {
   }
 
   importIndex() {
-    this._service.weekly((error, negotiations) => {
-      if (error) {
+    const promise = this._service.weekly();
+    promise.then(
+      negotiations => {
+        negotiations.forEach(negotiation => this._negotiations.add(negotiation));
+        this._message.text = 'Negotiations succesfully imported';
+        },
+      error => {
         this._message.text = 'There is an error importing weekly negotiations';
         return;
       }
-
-      negotiations.forEach(negotiation => this._negotiations.add(negotiation));
-      this._message.text = 'Negotiations succesfully imported';
-
-    });
+    );
   }
 
   _createNegotiation(){
