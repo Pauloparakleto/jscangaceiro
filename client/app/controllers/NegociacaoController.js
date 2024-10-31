@@ -77,7 +77,7 @@ class NegociacaoController {
           this._message.text = 'There is an error importing previous weekly negotiations';
           return;
         }
-    );
+    ).catch(error => this._message.text = error);
   }
 
   _createNegotiation(){
