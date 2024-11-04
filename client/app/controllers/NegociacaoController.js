@@ -55,6 +55,12 @@ class NegociacaoController {
   }
 
   importIndex() {
+    this._service.period().then(
+      negotiations => {
+        negotiations.forEach(negotiation => this._negotiations.add(negotiation));
+        this._message.text = 'Negotiations imported!';
+      }
+    ).catch(error => this._message.text = error)
     const negotiations = [];
     Promise.all([
       this._service.weekly(),

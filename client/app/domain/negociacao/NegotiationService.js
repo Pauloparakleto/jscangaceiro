@@ -3,6 +3,21 @@ class NegotiationService {
     this._http = new HTTPService();
   }
 
+  period(){
+    return Promise.all([
+      this.weekly(),
+      this.previousWeek(),
+      this.beforePreviousWeek()
+    ]).then(
+        period => {
+          return period.flat();
+        }
+      ).catch(error =>{
+        console.log(error);
+        throw new Error('Something went wrong on importing negotiations!');
+      });
+  }
+
   weekly(callback){
     return this._http.get('negociacoes/semana')
       .then(
