@@ -61,22 +61,6 @@ class NegociacaoController {
         this._message.text = 'Negotiations imported!';
       }
     ).catch(error => this._message.text = error)
-    const negotiations = [];
-    Promise.all([
-      this._service.weekly(),
-      this._service.previousWeek(),
-      this._service.beforePreviousWeek()
-    ]).then(
-        period => {
-          const flattenNegotiations = period.flat();
-          negotiations.push(...flattenNegotiations);
-          negotiations.forEach(negotiation => {
-            this._negotiations.add(negotiation)
-          });
-          this._message.text = 'All negotiations imported!';
-        }
-      ).catch(error => this._message.text = error);
-
   }
 
   _createNegotiation(){
