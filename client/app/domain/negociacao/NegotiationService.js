@@ -10,7 +10,8 @@ class NegotiationService {
       this.beforePreviousWeek()
     ]).then(
         period => {
-          return period.flat();
+          return period.flat()
+            .sort((a, b) => b.date.getTime() - a.date.getTime());
         }
       ).catch(error =>{
         console.log(error);
