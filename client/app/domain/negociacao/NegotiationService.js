@@ -9,10 +9,7 @@ class NegotiationService {
       this.previousWeek(),
       this.beforePreviousWeek()
     ]).then(
-        period => {
-          return period.flat()
-            .sort((a, b) => b.date.getTime() - a.date.getTime());
-        }
+        period => period.flat().sort((a, b) => b.date.getTime() - a.date.getTime())
       ).catch(error =>{
         console.log(error);
         throw new Error('Something went wrong on importing negotiations!');
@@ -22,16 +19,9 @@ class NegotiationService {
   weekly(callback){
     return this._http.get('negociacoes/semana')
       .then(
-        data =>
-          {
-            const negotiations = data.map(
-              negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor)
-            );
-
-            return negotiations;
-          },
-
-        error => 
+        data => data.map(negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor))
+        ,
+        error =>
           {
             throw new Error('Something went wrong importing weekly negotiations')
           }
@@ -41,16 +31,9 @@ class NegotiationService {
   previousWeek(callback){
     return this._http.get('negociacoes/anterior')
       .then(
-        data =>
-          {
-            const negotiations = data.map(
-              negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor)
-            );
-
-            return negotiations;
-          },
-
-        error => 
+        data => data.map(negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor))
+        ,
+        error =>
           {
             throw new Error('Something went wrong importing previous week negotiations')
           }
@@ -60,16 +43,9 @@ class NegotiationService {
   beforePreviousWeek(callback){
     return this._http.get('negociacoes/retrasada')
       .then(
-        data =>
-          {
-            const negotiations = data.map(
-              negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor)
-            );
-
-            return negotiations;
-          },
-
-        error => 
+        data => data.map(negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor))
+        ,
+        error =>
           {
             throw new Error('Something went wrong importing previous week negotiations')
           }
