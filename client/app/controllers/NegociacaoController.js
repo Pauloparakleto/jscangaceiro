@@ -55,37 +55,12 @@ class NegociacaoController {
   }
 
   importIndex() {
-    const negotiations = [];
-    const promise = this._service.weekly();
-    promise.then(
-      week => {
-        negotiations.push(...week);
-        return this._service.previousWeek();
-        },
-      error => {
-        this._message.text = 'There is an error importing weekly negotiations';
-        return;
+    this._service.period().then(
+      negotiations => {
+        negotiations.forEach(negotiation => this._negotiations.add(negotiation));
+        this._message.text = 'Negotiations imported!';
       }
-    ).then(
-        previousWeek => {
-          negotiations.push(...previousWeek);
-          return this._service.beforePreviousWeek();
-        },
-        error => {
-          this._message.text = 'There is an error importing previous week negotiations';
-        }
-      ).then(
-        beforePreviousWeek => {
-          negotiations.push(...beforePreviousWeek);
-          negotiations.forEach(negotiation => this._negotiations.add(negotiation));
-          this._message.text = 'Negotiations succesfully imported';
-        },
-
-        error => {
-          this._message.text = 'There is an error importing before previous weekly negotiations';
-          return;
-        }
-    ).catch(error => this._message.text = error);
+    ).catch(error => this._message.text = error)
   }
 
   _createNegotiation(){
