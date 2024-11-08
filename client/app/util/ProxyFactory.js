@@ -9,6 +9,8 @@ class ProxyFactory {
             target[prop].apply(target, arguments);
             hook(target);
           }
+        } else {
+          return target[prop];
         }
       },
 

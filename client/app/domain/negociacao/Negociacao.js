@@ -16,8 +16,12 @@ class Negociacao {
   get date(){
     return new Date(this._date.getTime());
   }
-  
+ 
   get volume(){
     return this._valor * this._quantidade;
+  }
+
+  isEqualTo(anotherNegotiation) {
+    return JSON.stringify(this) == JSON.stringify(anotherNegotiation);
   }
 }
