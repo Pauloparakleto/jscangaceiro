@@ -5,6 +5,7 @@
   </head>
   <body>
     <script>
+      let connection = null;
       const openRequest = indexedDB.open('cangaceiro', 1);
       openRequest.onupgradeneeded = e => {
         console.log('Create or modify an existent database');
@@ -13,6 +14,8 @@
 
       openRequest.onsuccess = e => {
         console.log('connection successfull');
+        console.log(e.target.result);
+        connection = e.target.result;
       };
 
       openRequest.onerror = e => {
