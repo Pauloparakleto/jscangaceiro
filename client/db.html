@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <title>Aprendendo IndexedDB</title>
+  </head>
+  <body>
+    <script>
+      const openRequest = indexedDB.open('cangaceiro', 1);
+      openRequest.onupgradeneeded = e => {
+        console.log('Create or modify an existent database');
+
+      };
+
+      openRequest.onsuccess = e => {
+        console.log('connection successfull');
+      };
+
+      openRequest.onerror = e => {
+        console.log(e.target.error);
+      };
+    </script>
+  </body>
+</html>
