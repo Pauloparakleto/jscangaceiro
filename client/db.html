@@ -6,10 +6,15 @@
   <body>
     <script>
       let connection = null;
-      const openRequest = indexedDB.open('cangaceiro', 1);
+      const openRequest = indexedDB.open('cangaceiro', 3);
       openRequest.onupgradeneeded = e => {
         console.log('Create or modify an existent database');
+        connection = e.target.result;
+        if(connection.objectStoreNames.contains('negotiations')){
+          connection.deleteObjectStore('negotiations');
+        }
 
+        connection.createObjectStore('negotiations', { autoIncrement: true });
       };
 
       openRequest.onsuccess = e => {
@@ -21,6 +26,23 @@
       openRequest.onerror = e => {
         console.log(e.target.error);
       };
+
+      function add() {
+        const negotiation = new Negociacao(new Date(), 1, 2);
+        const transaction = connection.transaction(['negotiations'], 'readwrite');
+        const store = transaction.objectStore('negotiations');
+        debugger
+        const request = store.add(negotiation);
+
+        request.onsuccess = e => {
+          console.log('Negotiation saved successfully');
+        };
+
+        request.onerror = e => {
+          console.log('There is an error on saving this negotiation');
+        };
+      }
     </script>
+    <script src='app/domain/negociacao/Negociacao.js' ></script>
   </body>
 </html>
