@@ -50,10 +50,10 @@
 
         cursor.onsuccess = e => {
           const current = e.target.result;
-          debugger
 
           if(current){
-            negotiations.push(current.value);
+            const negotiation = new Negociacao(current.value._date, current.value._quantidade, current.value._valor);
+            negotiations.push(negotiation);
             current.continue();
           } else {
             console.log(negotiations);
