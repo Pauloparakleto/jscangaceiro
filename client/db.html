@@ -29,18 +29,16 @@
 
       function add() {
         const negotiation = new Negociacao(new Date(), 1, 2);
-        const transaction = connection.transaction(['negotiations'], 'readwrite');
-        const store = transaction.objectStore('negotiations');
-        debugger
-        const request = store.add(negotiation);
+        const request = connection
+          .transaction(['negotiations'], 'readwrite')
+          .objectStore('negotiations')
+          .add(negotiation);
 
-        request.onsuccess = e => {
+        request.onsuccess = e =>
           console.log('Negotiation saved successfully');
-        };
 
-        request.onerror = e => {
+        request.onerror = e =>
           console.log('There is an error on saving this negotiation');
-        };
       }
     </script>
     <script src='app/domain/negociacao/Negociacao.js' ></script>
