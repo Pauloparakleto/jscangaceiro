@@ -22,6 +22,9 @@ const ConnectionFactory = ( () => {
 
         openRequest.onsuccess = e => {
           connection = e.target.result;
+          connection.close = () => {
+            throw new Error('This connection can not be closed directly');
+          }
           resolve(e.target.result);
         };
 
