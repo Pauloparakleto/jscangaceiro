@@ -1,42 +1,47 @@
-const stores = ['negotiations'];
-let connection = null;
+function tmp() {
 
-class ConnectionFactory {
-  constructor(){
-    throw new Error('Singleton class');
-  }
+  const stores = ['negotiations'];
+  let connection = null;
 
-  static getConnection() {
-    return new Promise((resolve, reject) => {
-      if (connection) {
-        return resolve(connection);
-      }
+  return class ConnectionFactory {
+    constructor(){
+      throw new Error('Singleton class');
+    }
 
-      const openRequest = indexedDB.open('cangaceiro', 6);
-      openRequest.onupgradeneeded = e => {
-        console.log('creating negotiations');
-         ConnectionFactory._createStores(e.target.result);
-      };
+    static getConnection() {
+      return new Promise((resolve, reject) => {
+        if (connection) {
+          return resolve(connection);
+        }
 
-      openRequest.onsuccess = e => {
-        connection = e.target.result;
-        resolve(e.target.result);
-      };
+        const openRequest = indexedDB.open('cangaceiro', 6);
+        openRequest.onupgradeneeded = e => {
+          console.log('creating negotiations');
+          ConnectionFactory._createStores(e.target.result);
+        };
 
-      openRequest.onerror = e => {
-        console.log(e.target.error)
-        reject(e.target.error.name);
-      };
-    });
-  }
+        openRequest.onsuccess = e => {
+          connection = e.target.result;
+          resolve(e.target.result);
+        };
 
-  static _createStores(connection) {
-    stores.forEach(store => {
-      if (connection.objectStoreNames.contains(store)) {
-          connection.deleteObjectStore(store);
-      }
+        openRequest.onerror = e => {
+          console.log(e.target.error)
+          reject(e.target.error.name);
+        };
+      });
+    }
 
-      connection.createObjectStore(store, { autoIncrement: true })
-    });
+    static _createStores(connection) {
+      stores.forEach(store => {
+        if (connection.objectStoreNames.contains(store)) {
+            connection.deleteObjectStore(store);
+        }
+
+        connection.createObjectStore(store, { autoIncrement: true })
+      });
+    }
   }
 }
+
+const ConnectionFactory = tmp();
