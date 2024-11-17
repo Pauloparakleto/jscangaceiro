@@ -1,4 +1,4 @@
-const ConnectionFactory = (function () {
+const ConnectionFactory = ( () => {
 
   const stores = ['negotiations'];
   let connection = null;
