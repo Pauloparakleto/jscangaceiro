@@ -2,6 +2,7 @@ const ConnectionFactory = ( () => {
 
   const stores = ['negotiations'];
   let connection = null;
+  let close = null;
 
   return class ConnectionFactory {
     constructor(){
@@ -22,6 +23,7 @@ const ConnectionFactory = ( () => {
 
         openRequest.onsuccess = e => {
           connection = e.target.result;
+          close = connection.close.bind(connection);
           connection.close = () => {
             throw new Error('This connection can not be closed directly');
           }
@@ -46,7 +48,7 @@ const ConnectionFactory = ( () => {
     }
 
     static closeConnection(){
-      if (connection) connection.close()
+      if (connection) close()
     }
   }
 })();
