@@ -1,4 +1,4 @@
-function tmp() {
+const ConnectionFactory = (function () {
 
   const stores = ['negotiations'];
   let connection = null;
@@ -42,6 +42,4 @@ function tmp() {
       });
     }
   }
-}
-
-const ConnectionFactory = tmp();
+})();
