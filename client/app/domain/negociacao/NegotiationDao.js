@@ -19,8 +19,32 @@ class NegotiationDao {
   }
 
   listAll(){
-    return new Promisse((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      const negotiations = [];
+      const cursor = this._connection
+            .transaction([this._store], 'readwrite')
+            .objectStore(this._store)
+            .openCursor();
 
+      cursor.onsuccess = e => {
+        const current = e.target.result;
+        if (current) {
+          const negotiation = new Negociacao(
+            current.value._date,
+            current.value._quantidade,
+            current.value._valor,
+          );
+          negotiations.push(negotiation);
+          current.continue();
+        } else {
+          resolve(negotiations);
+        }
+      }
+
+      cursor.onerror = e => {
+        console.log(e.target.error);
+        reject('In was not possible to list negotiations');
+      }
     });
   }
 }
