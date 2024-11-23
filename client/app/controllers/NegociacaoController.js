@@ -24,19 +24,24 @@ class NegociacaoController {
 
   adiciona(event) {
     try {
-      
       // cancela a submissao do formulario
       event.preventDefault();
+
 
       let converter = DateConverter;
 
       let date = converter.toDate(this._inputDate.value);
 
-      this._negotiations.add(this._createNegotiation());
+      const negotiation = this._createNegotiation();
 
-      this._message.text = 'You made a new negotiation!';
+      DaoFactory.getNegotiationDao()
+        .then(dao => dao.add(negotiation))
+        .then(() =>{
+          this._negotiations.add(negotiation);
+          this._message.text = 'You made a new negotiation!';
+          this._cleanForm();
+        });
 
-      this._cleanForm();
     } catch (error) {
       console.log(error);
       console.log(error.stack);
