@@ -4,13 +4,6 @@ class NegociacaoController {
     // I mention to JQuery, we will bind the $ variable to the document context
     const $ = document.querySelector.bind(document);
     const self = this;
-    DaoFactory.getNegotiationDao()
-      .then(dao => dao.listAll())
-      .then(negotiations =>
-        negotiations.forEach(negotiation =>
-          this._negotiations.add(negotiation)
-        )
-      ).catch(error => this._message.text = error);
 
     this._inputDate = $('#date');
     this._inputQuantity = $('#quantity');
@@ -27,6 +20,8 @@ class NegociacaoController {
       new MessageView('#messageView'),
       'text'
     );
+
+    this._init();
   }
 
   adiciona(event) {
@@ -75,6 +70,16 @@ class NegociacaoController {
         this._message.text = 'Negotiations imported!';
       }
     ).catch(error => this._message.text = error)
+  }
+
+  _init(){
+    DaoFactory.getNegotiationDao()
+      .then(dao => dao.listAll())
+      .then(negotiations =>
+        negotiations.forEach(negotiation =>
+          this._negotiations.add(negotiation)
+        )
+      ).catch(error => this._message.text = error);
   }
 
   _createNegotiation(){
