@@ -18,6 +18,20 @@ class NegotiationDao {
     });
   }
 
+  clearIndex(){
+    return new Promise((resolve, reject) => {
+      const request = this._connection
+            .transaction([this._store], 'readwrite')
+            .objectStore(this._store).clear();
+
+      request.onsuccess = e => resolve();
+      request.onerror = e => {
+        console.log(e.target.error);
+        reject('It was not possible to clear all negotiations');
+      };
+    });
+  }
+
   listAll(){
     return new Promise((resolve, reject) => {
       const negotiations = [];

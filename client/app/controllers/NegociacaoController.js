@@ -57,8 +57,12 @@ class NegociacaoController {
 
 
   clearIndex() {
-    this._negotiations.clearList();
-    this._message.text = 'Negotiation list is empty!';
+    DaoFactory.getNegotiationDao()
+      .then(dao => dao.clearIndex())
+      .then(() => {
+        this._negotiations.clearList();
+        this._message.text = 'Negotiation list is empty!';
+      }).catch(error => this._message.text = error);
   }
 
   importIndex() {
