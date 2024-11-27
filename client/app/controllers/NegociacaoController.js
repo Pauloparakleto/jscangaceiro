@@ -36,13 +36,13 @@ class NegociacaoController {
 
       const negotiation = this._createNegotiation();
 
-      DaoFactory.getNegotiationDao()
+      getNegotiationDao()
         .then(dao => dao.add(negotiation))
         .then(() =>{
           this._negotiations.add(negotiation);
           this._message.text = 'You made a new negotiation!';
           this._cleanForm();
-        });
+      });
 
     } catch (error) {
       console.log(error);
@@ -57,7 +57,7 @@ class NegociacaoController {
 
 
   clearIndex() {
-    DaoFactory.getNegotiationDao()
+    getNegotiationDao()
       .then(dao => dao.clearIndex())
       .then(() => {
         this._negotiations.clearList();
@@ -77,7 +77,7 @@ class NegociacaoController {
   }
 
   _init(){
-    DaoFactory.getNegotiationDao()
+    getNegotiationDao()
       .then(dao => dao.listAll())
       .then(negotiations =>
         negotiations.forEach(negotiation =>
