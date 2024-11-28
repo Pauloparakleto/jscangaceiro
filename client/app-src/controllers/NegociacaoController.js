@@ -1,5 +1,4 @@
-
-class NegociacaoController {
+export class NegociacaoController {
   constructor() {
     // I mention to JQuery, we will bind the $ variable to the document context
     const $ = document.querySelector.bind(document);
