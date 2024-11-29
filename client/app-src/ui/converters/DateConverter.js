@@ -1,4 +1,4 @@
-class DateConverter {
+export class DateConverter {
   constructor() {
     throw new Error('Must not be instanciated!');
 }

@@ -1,4 +1,4 @@
-class HTTPService {
+export class HTTPService {
   get(url){
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
