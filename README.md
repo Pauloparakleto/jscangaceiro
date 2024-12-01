@@ -1,6 +1,6 @@
 # jscangaceiro
 
-This is a small framework written javascript for a single page domain.
+This is a small framework written in javascript for a single page domain.
 
 ## Dev instalation
 
