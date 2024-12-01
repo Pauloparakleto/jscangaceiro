@@ -1,4 +1,4 @@
-class NegotiationDao {
+export class NegotiationDao {
   constructor (connection){
     this._connection = connection;
     this._store = 'negotiations';

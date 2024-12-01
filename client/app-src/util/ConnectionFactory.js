@@ -1,4 +1,4 @@
-const ConnectionFactory = ( () => {
+export const ConnectionFactory = ( () => {
 
   const stores = ['negotiations'];
   let connection = null;

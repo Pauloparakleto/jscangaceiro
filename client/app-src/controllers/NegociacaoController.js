@@ -1,5 +1,16 @@
+import { NegotiationService } from '../domain/negociacao/NegotiationService.js';
+import { Negociacao } from "../domain/negociacao/Negociacao.js";
+import { NegotiationDao } from "../domain/negociacao/NegotiationDao.js";
+import { Negotiations } from "../domain/negociacao/Negotiations.js";
+import { NegotiationsView } from "../ui/views/NegotiationsView.js";
+import { MessageView } from "../ui/views/MessageView.js";
+import { Message } from "../ui/models/Message.js";
+import { Bind } from "../util/Bind.js";
+import { getNegotiationDao } from "../util/DaoFactory.js";
+import { DateConverter } from "../ui/converters/DateConverter.js";
+import { InvalidDate } from "../ui/converters/InvalidDate.js";
 
-class NegociacaoController {
+export class NegociacaoController {
   constructor() {
     // I mention to JQuery, we will bind the $ variable to the document context
     const $ = document.querySelector.bind(document);
@@ -45,7 +56,6 @@ class NegociacaoController {
       });
 
     } catch (error) {
-      console.log(error);
       console.log(error.stack);
       if (error instanceof InvalidDate){
         this._message.text = error.message;
@@ -73,7 +83,12 @@ class NegociacaoController {
         ).forEach(negotiation => this._negotiations.add(negotiation));
         this._message.text = 'Negotiations imported!';
       }
-    ).catch(error => this._message.text = error)
+    ).catch(
+        error => {
+          console.log(error.stack);
+          this._message.text = error
+        }
+      )
   }
 
   _init(){
