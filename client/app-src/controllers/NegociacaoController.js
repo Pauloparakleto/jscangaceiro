@@ -6,7 +6,7 @@ import { NegotiationsView } from "../ui/views/NegotiationsView.js";
 import { MessageView } from "../ui/views/MessageView.js";
 import { Message } from "../ui/models/Message.js";
 import { Bind } from "../util/Bind.js";
-import { DaoFactory } from "../util/DaoFactory.js";
+import { getNegotiationDao } from "../util/DaoFactory.js";
 import { DateConverter } from "../ui/converters/DateConverter.js";
 import { InvalidDate } from "../ui/converters/InvalidDate.js";
 
