@@ -8,6 +8,7 @@ import { Message } from "../ui/models/Message.js";
 import { Bind } from "../util/Bind.js";
 import { DaoFactory } from "../util/DaoFactory.js";
 import { DateConverter } from "../ui/converters/DateConverter.js";
+import { InvalidDate } from "../ui/converters/InvalidDate.js";
 
 export class NegociacaoController {
   constructor() {
@@ -55,7 +56,6 @@ export class NegociacaoController {
       });
 
     } catch (error) {
-      console.log(error);
       console.log(error.stack);
       if (error instanceof InvalidDate){
         this._message.text = error.message;
