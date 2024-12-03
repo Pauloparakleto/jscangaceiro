@@ -83,14 +83,15 @@ export class NegociacaoController {
       )
   }
 
-  _init(){
-    getNegotiationDao()
-      .then(dao => dao.listAll())
-      .then(negotiations =>
-        negotiations.forEach(negotiation =>
-          this._negotiations.add(negotiation)
-        )
-      ).catch(error => this._message.text = error);
+  async _init(){
+    try {
+      const dao = await getNegotiationDao();
+      const negotiations = await dao.listAll();
+      negotiations.forEach(negotiation => this._negotiations.add(negotiation));
+    } catch (error) {
+      console.log(error.stack);
+      this._message.text = error;
+    }
   }
 
   _createNegotiation(){
