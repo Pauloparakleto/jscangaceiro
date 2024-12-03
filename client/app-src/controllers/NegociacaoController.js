@@ -1,7 +1,4 @@
-import { NegotiationService } from '../domain/negociacao/NegotiationService.js';
-import { Negociacao } from "../domain/negociacao/Negociacao.js";
-import { NegotiationDao } from "../domain/negociacao/NegotiationDao.js";
-import { Negotiations } from "../domain/negociacao/Negotiations.js";
+import { Negociacao, Negotiations, NegotiationDao, NegotiationService } from "../domain/index.js";
 import { NegotiationsView } from "../ui/views/NegotiationsView.js";
 import { MessageView } from "../ui/views/MessageView.js";
 import { Message } from "../ui/models/Message.js";
