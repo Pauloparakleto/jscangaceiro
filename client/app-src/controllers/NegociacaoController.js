@@ -1,7 +1,6 @@
 import { Negociacao, Negotiations, NegotiationDao, NegotiationService } from "../domain/index.js";
-import { NegotiationsView, MessageView, Message, DateConverter, InvalidDate } from "../ui/views/NegotiationsView.js";
-import { Bind } from "../util/Bind.js";
-import { getNegotiationDao } from "../util/DaoFactory.js";
+import { NegotiationsView, MessageView, Message, DateConverter, InvalidDate } from "../ui/index.js";
+import { Bind, getNegotiationDao } from "../util/index.js";
 
 export class NegociacaoController {
   constructor() {
