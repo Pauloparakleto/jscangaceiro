@@ -58,13 +58,18 @@ export class NegociacaoController {
   }
 
 
-  clearIndex() {
-    getNegotiationDao()
-      .then(dao => dao.clearIndex())
-      .then(() => {
-        this._negotiations.clearList();
-        this._message.text = 'Negotiation list is empty!';
-      }).catch(error => this._message.text = error);
+  async clearIndex() {
+    try {
+      debugger
+      const dao = await getNegotiationDao();
+      await dao.clearIndex();
+
+      this._negotiations.clearList();
+      this._message.text = 'Negotiation list is empty!';
+    } catch (error) {
+      console.log(error.stack);
+      this._message.text = error;
+    }
   }
 
   importIndex() {
