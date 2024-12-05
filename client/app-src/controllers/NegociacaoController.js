@@ -60,7 +60,6 @@ export class NegociacaoController {
 
   async clearIndex() {
     try {
-      debugger
       const dao = await getNegotiationDao();
       await dao.clearIndex();
 
@@ -72,20 +71,19 @@ export class NegociacaoController {
     }
   }
 
-  importIndex() {
-    this._service.period().then(
-      negotiations => {
-        negotiations.filter(
-          newNegotiation => !this._negotiations.toArray().some(oldNegotiation => oldNegotiation.isEqualTo(newNegotiation))
-        ).forEach(negotiation => this._negotiations.add(negotiation));
-        this._message.text = 'Negotiations imported!';
-      }
-    ).catch(
-        error => {
-          console.log(error.stack);
-          this._message.text = error
-        }
-      )
+  async importIndex() {
+    try {
+      const negotiations = await this._service.period();
+      negotiations.filter(
+        newNegotiation => !this._negotiations.toArray()
+          .some(oldNegotiation => oldNegotiation.isEqualTo(newNegotiation))
+      ).forEach(negotiation => this._negotiations.add(negotiation));
+
+      this._message.text = 'Negotiations imported!';
+    } catch (error) {
+      console.log(error.stack);
+      this._message.text = error;
+    }
   }
 
   async _init(){
