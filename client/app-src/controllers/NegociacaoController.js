@@ -58,29 +58,32 @@ export class NegociacaoController {
   }
 
 
-  clearIndex() {
-    getNegotiationDao()
-      .then(dao => dao.clearIndex())
-      .then(() => {
-        this._negotiations.clearList();
-        this._message.text = 'Negotiation list is empty!';
-      }).catch(error => this._message.text = error);
+  async clearIndex() {
+    try {
+      const dao = await getNegotiationDao();
+      await dao.clearIndex();
+
+      this._negotiations.clearList();
+      this._message.text = 'Negotiation list is empty!';
+    } catch (error) {
+      console.log(error.stack);
+      this._message.text = error;
+    }
   }
 
-  importIndex() {
-    this._service.period().then(
-      negotiations => {
-        negotiations.filter(
-          newNegotiation => !this._negotiations.toArray().some(oldNegotiation => oldNegotiation.isEqualTo(newNegotiation))
-        ).forEach(negotiation => this._negotiations.add(negotiation));
-        this._message.text = 'Negotiations imported!';
-      }
-    ).catch(
-        error => {
-          console.log(error.stack);
-          this._message.text = error
-        }
-      )
+  async importIndex() {
+    try {
+      const negotiations = await this._service.period();
+      negotiations.filter(
+        newNegotiation => !this._negotiations.toArray()
+          .some(oldNegotiation => oldNegotiation.isEqualTo(newNegotiation))
+      ).forEach(negotiation => this._negotiations.add(negotiation));
+
+      this._message.text = 'Negotiations imported!';
+    } catch (error) {
+      console.log(error.stack);
+      this._message.text = error;
+    }
   }
 
   async _init(){

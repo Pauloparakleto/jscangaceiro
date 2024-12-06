@@ -6,17 +6,21 @@ export class NegotiationService {
     this._http = new HTTPService();
   }
 
-  period(){
-    return Promise.all([
-      this.weekly(),
-      this.previousWeek(),
-      this.beforePreviousWeek()
-    ]).then(
-        period => period.flat().sort((a, b) => b.date.getTime() - a.date.getTime())
-      ).catch(error =>{
-        console.log(error);
-        throw new Error('Something went wrong on importing negotiations!');
-      });
+  async period(){
+    try {
+      let period = await Promise.all([
+        this.weekly(),
+        this.previousWeek(),
+        this.beforePreviousWeek()
+      ]);
+
+      return period
+        .flat()
+        .sort((a, b) => b.date.getTime() - a.date.getTime());
+    } catch (error) {
+      console.log(error);
+      throw new Error('Something went wrong on importing negotiations!');
+    }
   }
 
   weekly(callback){
