@@ -1,6 +1,6 @@
 import { Negociacao, Negotiations, NegotiationDao, NegotiationService } from "../domain/index.js";
 import { NegotiationsView, MessageView, Message, DateConverter, InvalidDate } from "../ui/index.js";
-import { Bind, getNegotiationDao } from "../util/index.js";
+import { Bind, getNegotiationDao, debounce } from "../util/index.js";
 
 export class NegociacaoController {
   constructor() {
@@ -27,6 +27,7 @@ export class NegociacaoController {
     this._init();
   }
 
+  @debounce()
   adiciona(event) {
     try {
       // cancela a submissao do formulario
@@ -71,6 +72,7 @@ export class NegociacaoController {
     }
   }
 
+  @debounce()
   async importIndex() {
     try {
       const negotiations = await this._service.period();
