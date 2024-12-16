@@ -27,6 +27,7 @@ export class NegociacaoController {
     this._init();
   }
 
+  @debounce()
   adiciona(event) {
     try {
       // cancela a submissao do formulario

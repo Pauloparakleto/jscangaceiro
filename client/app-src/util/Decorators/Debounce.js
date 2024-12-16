@@ -3,11 +3,12 @@ export function debounce(miliseconds = 500) {
     const root = descriptor.value;
     let timer = 0;
     descriptor.value = function(...args) {
+      if(event) event.preventDefault();
+
       clearTimeout(timer);
 
       timer = setTimeout(() => {
-        root.apply(this, args);
-        
+        root.apply(this, args); 
       }, miliseconds);
     }
 
