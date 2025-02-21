@@ -4,14 +4,13 @@ import { Bind, getNegotiationDao, debounce, controller } from "../util/index.js"
 
 @controller('#date', '#quantity', '#value')
 export class NegociacaoController {
-  constructor(inputDate, inputQuantity, inputValue) {
+  constructor(_inputDate, _inputQuantity, _inputValue) {
     // I mention to JQuery, we will bind the $ variable to the document context
     const $ = document.querySelector.bind(document);
     const self = this;
 
-    this._inputDate = inputDate;
-    this._inputQuantity = inputQuantity;
-    this._inputValue = inputValue;
+    Object.assign(this, { _inputDate, _inputQuantity, _inputValue })
+
     this._service = new NegotiationService();
     this._negotiations = new Bind(
       new Negotiations(),
