@@ -1,16 +1,17 @@
 import { Negociacao, Negotiations, NegotiationDao, NegotiationService } from "../domain/index.js";
 import { NegotiationsView, MessageView, Message, DateConverter, InvalidDate } from "../ui/index.js";
-import { Bind, getNegotiationDao, debounce } from "../util/index.js";
+import { Bind, getNegotiationDao, debounce, controller } from "../util/index.js";
 
+@controller('#date', '#quantity', '#value')
 export class NegociacaoController {
-  constructor() {
+  constructor(inputDate, inputQuantity, inputValue) {
     // I mention to JQuery, we will bind the $ variable to the document context
     const $ = document.querySelector.bind(document);
     const self = this;
 
-    this._inputDate = $('#date');
-    this._inputQuantity = $('#quantity');
-    this._inputValue = $('#value');
+    this._inputDate = inputDate;
+    this._inputQuantity = inputQuantity;
+    this._inputValue = inputValue;
     this._service = new NegotiationService();
     this._negotiations = new Bind(
       new Negotiations(),
