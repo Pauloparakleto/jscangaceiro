@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../app-src/util/validatePresence.js"],"names":["validatePresence","param","Error"],"mappings":";;;AAAO,WAASA,gBAAT,CAA0BC,KAA1B,EAAiC;AACtC,UAAM,IAAIC,KAAJ,CAAW,GAAED,KAAM,eAAnB,CAAN;AACD;;8BAFeD,gB","file":"validatePresence.js","sourcesContent":["export function validatePresence(param) {\n  throw new Error(`${param} is mandatory`);\n}\n"]}
