@@ -1,3 +1,6 @@
+import { Negociacao } from '../index.js';
+
+
 export class NegotiationDao {
   constructor (connection){
     this._connection = connection;
