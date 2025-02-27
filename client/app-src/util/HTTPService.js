@@ -6,7 +6,7 @@ export class HTTPService {
 
   get(url){
     return fetch(url)
-      .then(response => this._handleErrors(response)
+      .then(response => this._handleErrors(response))
       .then(response => response.json());
   }
 }

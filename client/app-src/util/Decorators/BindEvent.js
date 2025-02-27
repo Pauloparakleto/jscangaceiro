@@ -10,7 +10,6 @@ export function bindEvent(
       'bindEvent',
       { event, selector, preventDefault, propertyKey },
       Object.getPrototypeOf(target), propertyKey);
-    )
 
     return descriptor;
   }
