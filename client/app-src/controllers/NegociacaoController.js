@@ -5,10 +5,6 @@ import { Bind, bindEvent, getNegotiationDao, debounce, controller } from "../uti
 @controller('#date', '#quantity', '#value')
 export class NegociacaoController {
   constructor(_inputDate, _inputQuantity, _inputValue) {
-    // I mention to JQuery, we will bind the $ variable to the document context
-    const $ = document.querySelector.bind(document);
-    const self = this;
-
     Object.assign(this, { _inputDate, _inputQuantity, _inputValue })
 
     this._service = new NegotiationService();
