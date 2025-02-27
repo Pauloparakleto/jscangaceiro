@@ -73,11 +73,14 @@ export class NegociacaoController {
   @debounce()
   async importIndex() {
     try {
+      const dao = await getNegotiationDao();
       const negotiations = await this._service.period();
       negotiations.filter(
         newNegotiation => !this._negotiations.toArray()
           .some(oldNegotiation => oldNegotiation.isEqualTo(newNegotiation))
-      ).forEach(negotiation => this._negotiations.add(negotiation));
+      ).forEach(negotiation => {
+          this._negotiations.add(negotiation)
+          dao.add(negotiation)});
 
       this._message.text = 'Negotiations imported!';
     } catch (error) {
