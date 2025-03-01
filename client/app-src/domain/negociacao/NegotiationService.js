@@ -24,7 +24,8 @@ export class NegotiationService {
   }
 
   weekly(callback){
-    return this._http.get('negociacoes/semana')
+    return this._http
+      .get('http://localhost:3000/negociacoes/semana')
       .then(
         data => data.map(negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor))
         ,
@@ -36,7 +37,7 @@ export class NegotiationService {
   }
 
   previousWeek(callback){
-    return this._http.get('negociacoes/anterior')
+    return this._http.get('http://localhost:3000/negociacoes/anterior')
       .then(
         data => data.map(negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor))
         ,
@@ -48,7 +49,7 @@ export class NegotiationService {
   }
  
   beforePreviousWeek(callback){
-    return this._http.get('negociacoes/retrasada')
+    return this._http.get('http://localhost:3000/negociacoes/retrasada')
       .then(
         data => data.map(negotiation => new Negociacao(new Date(negotiation.data), negotiation.quantidade, negotiation.valor))
         ,
